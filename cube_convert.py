@@ -27,18 +27,18 @@ template = \
              %2s  %2s  %2s
 """
 
-print template % tuple(range(1,49))
-print "Enter the color of each square, all on one line."
-print "R - Red,   B - BLUE,   W - WHITE"
-print "G - Green, Y - Yellow, O - Orange"
-cc = raw_input(">")
+print(template % tuple(range(1,49)))
+print("Enter the color of each square, all on one line.")
+print("R - Red,   B - BLUE,   W - WHITE")
+print("G - Green, Y - Yellow, O - Orange")
+cc = input(">")
 
 # Prepending a character because I used the wrong indexes below and
 # I'm not correcting it
 cc = "@" + cc.strip().lower()
     
 if len(cc) != 49:
-    print "Bad input"
+    print("Bad input")
     sys.exit(1)
 
 # Now for some painful processing
@@ -90,34 +90,34 @@ cubies.append("%s%snnn%s" % (cc[14],cc[8],cc[15]))
 fc = ""
 try:
     # Pos 1
-    fc += filter(lambda a: 'y' in a and 'b'  in a and 'o' in a, cubies)[0]
-    fc += filter(lambda a: 'y' in a and 'o'  in a and a.count('n')==4, cubies)[0]
-    fc += filter(lambda a: 'y' in a and 'o'  in a and 'g' in a, cubies)[0]
-    fc += filter(lambda a: 'y' in a and 'b'  in a and a.count('n')==4, cubies)[0]
-    fc += filter(lambda a: 'y' in a and 'g'  in a and a.count('n')==4, cubies)[0]
-    fc += filter(lambda a: 'y' in a and 'b'  in a and 'r' in a, cubies)[0]
-    fc += filter(lambda a: 'y' in a and 'r'  in a and a.count('n')==4, cubies)[0]
-    fc += filter(lambda a: 'y' in a and 'r'  in a and 'g' in a, cubies)[0]
+    fc += next(filter(lambda a: 'y' in a and 'b'  in a and 'o' in a, cubies))
+    fc += next(filter(lambda a: 'y' in a and 'o'  in a and a.count('n')==4, cubies))
+    fc += next(filter(lambda a: 'y' in a and 'o'  in a and 'g' in a, cubies))
+    fc += next(filter(lambda a: 'y' in a and 'b'  in a and a.count('n')==4, cubies))
+    fc += next(filter(lambda a: 'y' in a and 'g'  in a and a.count('n')==4, cubies))
+    fc += next(filter(lambda a: 'y' in a and 'b'  in a and 'r' in a, cubies))
+    fc += next(filter(lambda a: 'y' in a and 'r'  in a and a.count('n')==4, cubies))
+    fc += next(filter(lambda a: 'y' in a and 'r'  in a and 'g' in a, cubies))
     # Pos 9
-    fc += filter(lambda a: 'o' in a and 'b'  in a and a.count('n')==4, cubies)[0]
-    fc += filter(lambda a: 'o' in a and 'g'  in a and a.count('n')==4, cubies)[0]
-    fc += filter(lambda a: 'b' in a and 'r'  in a and a.count('n')==4, cubies)[0]
-    fc += filter(lambda a: 'g' in a and 'r'  in a and a.count('n')==4, cubies)[0]
+    fc += next(filter(lambda a: 'o' in a and 'b'  in a and a.count('n')==4, cubies))
+    fc += next(filter(lambda a: 'o' in a and 'g'  in a and a.count('n')==4, cubies))
+    fc += next(filter(lambda a: 'b' in a and 'r'  in a and a.count('n')==4, cubies))
+    fc += next(filter(lambda a: 'g' in a and 'r'  in a and a.count('n')==4, cubies))
     # Pos 13
-    fc += filter(lambda a: 'w' in a and 'b'  in a and 'o' in a, cubies)[0]
-    fc += filter(lambda a: 'w' in a and 'o'  in a and a.count('n')==4, cubies)[0]
-    fc += filter(lambda a: 'w' in a and 'o'  in a and 'g' in a, cubies)[0]
-    fc += filter(lambda a: 'w' in a and 'b'  in a and a.count('n')==4, cubies)[0]
-    fc += filter(lambda a: 'w' in a and 'g'  in a and a.count('n')==4, cubies)[0]
-    fc += filter(lambda a: 'w' in a and 'b'  in a and 'r' in a, cubies)[0]
-    fc += filter(lambda a: 'w' in a and 'r'  in a and a.count('n')==4, cubies)[0]
-    fc += filter(lambda a: 'w' in a and 'r'  in a and 'g' in a, cubies)[0]
+    fc += next(filter(lambda a: 'w' in a and 'b'  in a and 'o' in a, cubies))
+    fc += next(filter(lambda a: 'w' in a and 'o'  in a and a.count('n')==4, cubies))
+    fc += next(filter(lambda a: 'w' in a and 'o'  in a and 'g' in a, cubies))
+    fc += next(filter(lambda a: 'w' in a and 'b'  in a and a.count('n')==4, cubies))
+    fc += next(filter(lambda a: 'w' in a and 'g'  in a and a.count('n')==4, cubies))
+    fc += next(filter(lambda a: 'w' in a and 'b'  in a and 'r' in a, cubies))
+    fc += next(filter(lambda a: 'w' in a and 'r'  in a and a.count('n')==4, cubies))
+    fc += next(filter(lambda a: 'w' in a and 'r'  in a and 'g' in a, cubies))
 except IndexError:
     sys.exit( "Invalid cube entered: not all cubies accounted for")
 
 if len(fc) != 120:
     sys.exit( "An odd error has occured, final code for cube is not correct length: %r" % fc)
 
-print "\nYour cube string:"
-print fc
+print("\nYour cube string:")
+print(fc)
 
