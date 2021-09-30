@@ -49,7 +49,7 @@ int make_edge(int t)
 }
 
 /* Reads in tables and starts the solver */
-int solve(char *tosolve)
+int solve(char *tosolve, int depth_limit)
 {
     FILE *input;
     unsigned char *corner_table, *edge_table, *edge_table2;
@@ -85,9 +85,8 @@ int solve(char *tosolve)
     fclose(input);
 
     cube_120convert(tosolve, tosolve_converted);
-    goal_solve(tosolve_converted, cube_solved, corner_table, edge_table,
-            edge_table2); 
-    return 1;
+    return goal_solve(tosolve_converted, cube_solved, corner_table, edge_table,
+            edge_table2, depth_limit);
 }
 
 int main(int argc, char **argv)
@@ -97,9 +96,9 @@ int main(int argc, char **argv)
     // Was the cube string specified on the command line? If not, present a
     // menu
     if (argc == 2) {
-        solve(argv[1]);
-        exit(0);
-    }
+        return solve(argv[1], GOAL_MAXDEPTH);
+    } else if (argc > 2)
+        return solve(argv[1], atoi(argv[2]));
 menu_top:
     printf("What would you like to do?\n");
     printf("1) Solve a cube\n");
@@ -126,7 +125,7 @@ menu_top:
                 goto menu_top;
             }
             printf("\n");
-            solve(cube_raw);
+            solve(cube_raw, GOAL_MAXDEPTH);
             break;
         case 2:
             printf("Generating corner cube table\n");

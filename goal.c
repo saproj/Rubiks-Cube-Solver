@@ -61,7 +61,8 @@ static void sort_turns(qdata **turns_sorted, int *heuristics, int numturns)
 int goal_solve(const char *scrambled, const char *solved,
         const unsigned char *cornertable,
         const unsigned char *edgetable1,
-        const unsigned char *edgetable2)
+        const unsigned char *edgetable2,
+        int depth_limit)
 {
     /*
      * declaring all variables upfront
@@ -130,7 +131,9 @@ int goal_solve(const char *scrambled, const char *solved,
      * moves deep is going to take forever.  Consider changing to unconditional
      * loop, maybe it'll save a few instructions?
      */
-    while (depth <= GOAL_MAXDEPTH)
+    if (GOAL_MAXDEPTH < depth_limit)
+        depth_limit = GOAL_MAXDEPTH;
+    while (depth <= depth_limit)
     {
         if (stack->length == 0)
         {
@@ -314,7 +317,13 @@ int goal_solve(const char *scrambled, const char *solved,
 solve_cleanup:
     /* XXX MAKE SURE STACK IS EMPTY (could still leak memory) */
     free(stack);
-    return 1;
+
+    if (!solution_found)
+        return GOAL_MAXDEPTH + 1;
+    else
+        {}
+
+    return depth;
 }
 
 
