@@ -345,7 +345,7 @@ void cube_print_solution(const int *path)
             case 1:
             case 7:
             case 13:
-                face = 'T';
+                face = 'U';
                 break;
             case 2:
             case 8:
@@ -369,11 +369,11 @@ void cube_print_solution(const int *path)
                 break;
         }
         if (*t >= 12) {
-            fprintf(stdout, "2%c ", face);
+            fprintf(stdout, " %c2", face);
         } else if (*t >= 6) {
-            fprintf(stdout, "%c' ", face);
+            fprintf(stdout, " %c'", face);
         } else {
-            fprintf(stdout, "%c ", face);
+            fprintf(stdout, " %c", face);
         }
         ++t;
     }
